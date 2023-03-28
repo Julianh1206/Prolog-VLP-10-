@@ -2,15 +2,13 @@
 
 invertir(N,Invertd):- invertir(N,0,_,Invertd),!.
 
-invertir(0,Ac1,Global,0):- Global is Ac1,!.
+invertir(0,Acm1,Global,0):- Global is Acm1,!.
 
-invertir(N,Ac,Global,Invertd):-
+invertir(N,Acm,Global,Invertd):-
+	N>0, Res is mod(N,10), CC is (N-Res)/10, Acm1 is Acm+1,
+    invertir(CC, Acm1,Global,Invertd2),
+    Invertd is (Res*(10**(Global-Acm1)))+Invertd2.
 
-    N>0, Res is mod(N,10), CC is (N-Res)/10, 
-    
-    Ac1 is Ac+1,invertir(CC, Ac1,Global,Invertd2),
-    
-    Invertd is (Res*(10**(Global-Ac1)))+Invertd2.
     
     
 ## Punto 2: 
@@ -25,13 +23,41 @@ inv(N, Res) :-
     invA(N, 0, Res).
 
 ## Punto 3:
+quitar(E,[N],[N]):- E\==N,!.
+quitar(E,[N,M],[N]):- E==M,!.
+
+quitar(E,L,Lr):- 
+    L = [Lh|Lt], E==Lh, quitar(E,Lt,Lr1), Lr = Lr1,!.
+
+quitar(E,L,Lr):- 
+    L = [Lh|Lt], E \== Lh, quitar(E, Lt, Lr1), Lr=[Lh|Lr1],!.
 
 
 ## Punto 4:
+%a
+fibonacci(X,Y):- fibt(X,0,1,Y),!.
+fibt(1,_,C1,Y):- Y is C1, !.
+fibt(X,C,C1,Y):- X>1, X1 is X-1, C2 is C+C1, fibt(X1,C1,C2,Y).
 
+ %b
 
 ## Punto 5:
 
+num(1). 
+num(2). 
+num(3). 
+num(4).
 
+unicos(P,Q,R,S) :- num(P), num(Q), num(R), num(S),
+\+ P=Q, \+ P=R, \+ P=S, \+ Q=R, \+ Q=S, \+ R=S.
 
-## Punto 6:
+sudoku( R11,R12,R13,R14,
+		R21,R22,R23,R24,
+      	R31,R32,R33,R34,
+		R41,R42,R43,R44) :- 
+    unicos(R11,R12,R21,R22), unicos(R13,R14,R23,R24), 
+    unicos(R31,R32,R41,R42), unicos(R33,R34,R43,R44),
+    unicos(R11,R12,R13,R14), unicos(R21,R22,R23,R24),
+    unicos(R31,R32,R33,R34), unicos(R41,R42,R43,R44),
+    unicos(R11,R21,R31,R41), unicos(R12,R22,R32,R42),
+    unicos(R13,R23,R33,R43), unicos(R14,R24,R34,R44).
