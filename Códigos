@@ -1,0 +1,33 @@
+## Punto 1:
+
+invertir(N,Invertd):- invertir(N,0,_,Invertd),!.
+
+invertir(0,Ac1,Global,0):- Global is Ac1,!.
+
+invertir(N,Ac,Global,Invertd):-
+
+    N>0, Res is mod(N,10), CC is (N-Res)/10, 
+    
+    Ac1 is Ac+1,invertir(CC, Ac1,Global,Invertd2),
+    
+    Invertd is (Res*(10**(Global-Ac1)))+Invertd2.
+    
+    
+## Punto 2: 
+invA(N, Acc, Res) :- N<10,Res is Acc*10 + N.
+invA(N, Acc, Res) :-
+    Dig is mod(N, 10),
+    NewAcc is Acc * 10 + Dig,
+    NewN is div(N, 10),
+    invA(NewN, NewAcc, Res).
+
+inv(N, Res) :-
+    invA(N, 0, Res).
+
+## Punto 3:
+
+
+## Punto 4:
+
+
+## Punto 5:
