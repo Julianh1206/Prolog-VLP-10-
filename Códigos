@@ -20,7 +20,7 @@ invA(N, Acc, Res) :-
     invA(NewN, NewAcc, Res).
 
 inv(N, Res) :-
-    invA(N, 0, Res).
+    invA(N, 0, Res),!.
 
 ## Punto 3:
 quitar(E,[N],[N]):- E\==N,!.
