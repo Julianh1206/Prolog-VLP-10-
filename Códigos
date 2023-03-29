@@ -40,6 +40,22 @@ fibt(1,_,C1,Y):- Y is C1, !.
 fibt(X,C,C1,Y):- X>1, X1 is X-1, C2 is C+C1, fibt(X1,C1,C2,Y).
 
  %b
+ producto(X,Y,Z):- p_fac_tail(X,X,Y,Z), X>Y, !.
+producto(X,Y,Z):- p_fac_tail(Y,Y,X,Z), Y>X, !.
+producto(0,0,1):-!.
+producto(X,Y,Z):- fac_cuadrado_tail(X,(X**2),Z), X=:=Y,!.
+
+
+p_fac_tail(1, R, _, R):-!.
+
+p_fac_tail(X, Ac, Y, R):- 
+    X1 is X-1, X1>Y,  Ac1 is Ac*X1, p_fac_tail(X1, Ac1, Y, R).
+p_fac_tail(X, Ac, Y, R):- 
+    X1 is X-1, X1=:=Y,  Y1 is Y-1, Ac1 is Ac*(X1**2), p_fac_tail(X1, Ac1, Y1, R).
+
+fac_cuadrado_tail(1,R,R1):- R1 is R,!.
+fac_cuadrado_tail(X, Ac, R):-
+    X1 is X-1, Ac1 is Ac*(X1**2), fac_cuadrado_tail(X1,Ac1,R).
 
 ## Punto 5:
 
